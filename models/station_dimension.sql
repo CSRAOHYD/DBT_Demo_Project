@@ -1,17 +1,11 @@
 WITH BIKE_CTE AS (
     SELECT 
+        DISTINCT 
         START_STATION_ID    AS STATION_ID
        ,START_SATATION_NAME AS STATION_NAME
        ,START_STATION_LA    AS STATION_LA
        ,START_STATION_LON   AS STATION_LON
-    FROM {{ source('DEMO', 'bike') }}
-    UNION
-    SELECT 
-        END_STATION_ID    AS STATION_ID
-       ,END_STATION_NAME AS STATION_NAME
-       ,END_STATION_LA    AS STATION_LA
-       ,END_STATION_LON   AS STATION_LON
-    FROM {{ source('DEMO', 'bike') }}
+    FROM {{ ref('stage_bike') }}
 )
 SELECT 
 * 
